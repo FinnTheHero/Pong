@@ -2,17 +2,19 @@
 
 void createWindow()
 {
-	// Window minimum dimensions & starting point
-	const int windowMinWidth = 800, windowMinHeight = 600;
+	// Window starting dimensions
+	int windowWidth = 800, windowHeight = 600;
 
-	// Window Name
+	// Window name
 	std::string windowName = "Pong";
 
-	// Create Window
-	InitWindow(windowMinWidth, windowMinHeight, windowName.c_str());
+	// Create the window
+	InitWindow(windowWidth, windowHeight, windowName.c_str());
 
-	// Make window resizable using flags
+	// Adjust the window states
 	SetWindowState(FLAG_WINDOW_RESIZABLE);
+	SetWindowState(FLAG_WINDOW_MAXIMIZED);
+	SetWindowState(FLAG_WINDOW_ALWAYS_RUN);
 
-	SetTargetFPS(120);
+	SetTargetFPS(60);
 }

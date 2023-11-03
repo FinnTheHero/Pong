@@ -8,16 +8,16 @@ public:
 	// Ball positions
 	int x = GetScreenWidth() / 2, y = GetScreenHeight() / 2;
 
-	// Ball Dimensions
+	// Ball dimensions
 	const int width = 20, height = 20;
 
 	// Ball directions
-	float xVel = 0.0, yVel = 1.0;
+	float xVel = -1.0, yVel = 0.0;
 
 	// Ball speed
-	double speed = 200;
+	int speed = 200;
 
-	// Methods
+	// Ball Methods
 	void draw();
 	void move();
 	void collide();

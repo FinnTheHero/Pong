@@ -7,6 +7,7 @@
 // Game files
 #include "window.h"
 #include "ball.h"
+#include "paddle.h"
 
 int main(void) {
 	
@@ -14,6 +15,9 @@ int main(void) {
 
 	// Create ball object
 	Ball ball;
+
+	// Create paddle object
+	Paddle paddle;
 
 	// Main loop
 	while(!WindowShouldClose())
@@ -23,6 +27,11 @@ int main(void) {
 		// Set background to white
 		ClearBackground(BLACK);
 		
+		// Paddle methods
+		paddle.draw();
+		paddle.move();
+		paddle.collide(ball);
+
 		// Ball methods
 		ball.draw();
 		ball.move();
