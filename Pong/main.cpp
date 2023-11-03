@@ -1,21 +1,19 @@
+// Standard libraries
 #include <iostream>
+
+// Include Raylib
 #include <raylib.h>
+
+// Game files
+#include "window.h"
+#include "ball.h"
 
 int main(void) {
 	
-	// Window minimum dimensions & starting point
-	const int windowMinWidth = 800, windowMinHeight = 600;
-	
-	// Window Name
-	std::string windowName = "Pong";
-	
-	// Create Window
-	InitWindow(windowMinWidth,windowMinHeight,windowName.c_str());
+	createWindow();
 
-	// Make window resizable using flags
-	SetWindowState(FLAG_WINDOW_RESIZABLE);
-
-	SetTargetFPS(60);
+	// Create ball object
+	Ball ball;
 
 	// Main loop
 	while(!WindowShouldClose())
@@ -23,8 +21,13 @@ int main(void) {
 		BeginDrawing();
 		
 		// Set background to white
-		ClearBackground(RAYWHITE);
+		ClearBackground(BLACK);
 		
+		// Ball methods
+		ball.draw();
+		ball.move();
+		ball.collide();
+
 		// Draw FPS in top left corner
 		DrawFPS(10, 10);
 
