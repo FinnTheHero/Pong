@@ -10,10 +10,10 @@ public:
 	int x, y;
 	
 	// Paddle dimensions
-	const int width = 20, height = 80;
+	const int width = 25, height = 100;
 	
 	// Paddle speed
-	int speed = 200;
+	int speed = 350;
 
 	// Constructor
 	Paddle(int x, int y);

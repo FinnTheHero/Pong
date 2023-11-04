@@ -15,7 +15,7 @@ public:
 	float xVel = -1.0, yVel = 0.0;
 
 	// Ball speed
-	int speed = 200;
+	int speed = 400;
 
 	// Ball Methods
 	void draw();
