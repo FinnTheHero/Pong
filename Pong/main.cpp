@@ -30,22 +30,22 @@ int main(void) {
 		// Set background to white
 		ClearBackground(BLACK);
 		
-		// Left paddle methods
-		leftPaddle.draw();
-		leftPaddle.moveUp();
-		leftPaddle.moveDown();
-		leftPaddle.collide(ball);
-
-		// Right paddle methods
-		RightPaddle.draw();
-		RightPaddle.moveUp();
-		RightPaddle.moveDown();
-		RightPaddle.collide(ball);
-
 		// Ball methods
 		ball.draw();
 		ball.move();
 		ball.collide();
+
+		// Left paddle methods
+		leftPaddle.collide(ball);
+		leftPaddle.draw();
+		leftPaddle.moveUp();
+		leftPaddle.moveDown();
+
+		// Right paddle methods
+		RightPaddle.collide(ball);
+		RightPaddle.draw();
+		RightPaddle.moveUp();
+		RightPaddle.moveDown();
 
 		// Draw FPS in top left corner
 		DrawFPS(10, 10);

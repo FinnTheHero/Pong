@@ -9,6 +9,19 @@ void RightPaddle::collide(Ball& ball)
 	if (ball.x + ball.width >= this->x)
 	{
 		ball.xVel = -ball.xVel;
+
+		// Calculate the center of the ball
+		float ballCenterY = ball.y + ball.height / 2.0;
+
+		// Calculate the center of the paddle
+		float paddleCenterY = this->y + this->height / 2.0;
+
+		// Calculate the relative position of the ball's center compared to the paddle's center
+		float relativePosition = ballCenterY - paddleCenterY;
+
+		// Adjust the Y velocity based on the relative position
+		float newYVel = relativePosition / (this->height / 2.0);
+		ball.yVel = std::min(std::max(newYVel, -0.9f), 0.9f);
 	}
 }
 
