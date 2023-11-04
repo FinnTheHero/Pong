@@ -7,16 +7,40 @@ class Paddle
 {
 public:
 	// Paddle positions
-	int x = 20, y = GetScreenHeight() / 2;
+	int x, y;
 	
 	// Paddle dimensions
 	const int width = 20, height = 80;
 	
 	// Paddle speed
 	int speed = 200;
+
+	// Constructor
+	Paddle(int x, int y);
 	
 	// Paddle methods
 	void draw();
-	void move();
+};
+
+class LeftPaddle : public Paddle {
+public:
+	// Left padle constructor
+	LeftPaddle(int x, int y);
+
+	// Left paddle methods
 	void collide(Ball& ball);
+	void moveUp();
+	void moveDown();
+};
+
+class RightPaddle : public Paddle {
+public:
+
+	// Right paddle constructor
+	RightPaddle(int x, int y);
+	
+	// Right paddle methods
+	void collide(Ball& ball);
+	void moveUp();
+	void moveDown();
 };

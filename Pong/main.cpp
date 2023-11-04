@@ -16,8 +16,11 @@ int main(void) {
 	// Create ball object
 	Ball ball;
 
-	// Create paddle object
-	Paddle paddle;
+	// Create left paddle object
+	LeftPaddle leftPaddle(30,GetScreenHeight() / 2);
+
+	// Create right paddle object
+	RightPaddle RightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2);
 
 	// Main loop
 	while(!WindowShouldClose())
@@ -27,10 +30,17 @@ int main(void) {
 		// Set background to white
 		ClearBackground(BLACK);
 		
-		// Paddle methods
-		paddle.draw();
-		paddle.move();
-		paddle.collide(ball);
+		// Left paddle methods
+		leftPaddle.draw();
+		leftPaddle.moveUp();
+		leftPaddle.moveDown();
+		leftPaddle.collide(ball);
+
+		// Right paddle methods
+		RightPaddle.draw();
+		RightPaddle.moveUp();
+		RightPaddle.moveDown();
+		RightPaddle.collide(ball);
 
 		// Ball methods
 		ball.draw();
