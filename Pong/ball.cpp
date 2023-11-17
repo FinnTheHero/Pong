@@ -26,3 +26,12 @@ void Ball::collide()
         this->yVel = -this->yVel;
     }
 }
+
+void Ball::reset(float x, float y)
+{
+    Ball::ballRec.x = x;
+    Ball::ballRec.y = y;
+
+    this->xVel = -1;
+    this->yVel = 0;
+}

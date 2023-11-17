@@ -39,3 +39,9 @@ void RightPaddle::moveDown()
 		RightPaddle::rightPaddleRec.y += GetFrameTime() * this->speed;
 	}
 }
+
+void RightPaddle::reset(float x, float y)
+{
+	RightPaddle::rightPaddleRec.x = x;
+	RightPaddle::rightPaddleRec.y = y;
+}

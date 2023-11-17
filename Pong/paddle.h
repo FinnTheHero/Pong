@@ -34,6 +34,7 @@ public:
 	void collide(Ball& ball);
 	void moveUp();
 	void moveDown();
+	void reset(float x, float y);
 };
 
 class RightPaddle : public Paddle {
@@ -48,4 +49,5 @@ public:
 	void collide(Ball& ball);
 	void moveUp();
 	void moveDown();
+	void reset(float x, float y);
 };

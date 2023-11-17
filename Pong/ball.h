@@ -24,4 +24,5 @@ public:
 	void draw();
 	void move();
 	void collide();
+	void reset(float x, float y);
 };

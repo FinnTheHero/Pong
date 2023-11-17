@@ -15,14 +15,19 @@ void Game::run()
 	LeftPaddle leftPaddle(30, GetScreenHeight() / 2 - 50);
 
 	// Create right paddle object
-	RightPaddle RightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
+	RightPaddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
 
 	// Main loop
 	while (!WindowShouldClose())
 	{
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
+			// Get back to menu
 			Game::setGameMode(MENU);
+			// Reset ball and paddles
+			leftPaddle.reset(30, GetScreenHeight() / 2 - 50);
+			rightPaddle.reset(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
+			ball.reset(GetScreenWidth() / 2, GetScreenHeight() / 2);
 		}
 
 
@@ -32,10 +37,10 @@ void Game::run()
 			Game::menu();
 			break;
 		case MULTIPLAYER:
-			Game::multiPlayer(ball, leftPaddle, RightPaddle);
+			Game::multiPlayer(ball, leftPaddle, rightPaddle);
 			break;
 		case SINGLEPLAYER:
-			Game::singlePlayer(ball, leftPaddle, RightPaddle);
+			Game::singlePlayer(ball, leftPaddle, rightPaddle);
 			break;
 		}
 
