@@ -22,4 +22,6 @@ void createWindow()
 	SetWindowState(FLAG_WINDOW_ALWAYS_RUN);
 
 	SetTargetFPS(60);
+
+	SetExitKey(KEY_NULL);
 }

@@ -6,6 +6,7 @@ Paddle::Paddle(float x, float y)
 	this->y = y;
 }
 
+
 void Paddle::draw(Rectangle paddle)
 {
 	DrawRectangleRec(paddle, GREEN);
