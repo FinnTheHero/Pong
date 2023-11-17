@@ -24,10 +24,8 @@ void Game::run()
 		{
 			// Get back to menu
 			Game::setGameMode(MENU);
-			// Reset ball and paddles
-			leftPaddle.reset(30, GetScreenHeight() / 2 - 50);
-			rightPaddle.reset(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
-			ball.reset(GetScreenWidth() / 2, GetScreenHeight() / 2);
+			
+			Game::reset(ball, leftPaddle, rightPaddle);
 		}
 
 
@@ -41,6 +39,9 @@ void Game::run()
 			break;
 		case SINGLEPLAYER:
 			Game::singlePlayer(ball, leftPaddle, rightPaddle);
+			break;
+		case END:
+			Game::end();
 			break;
 		}
 
@@ -84,6 +85,9 @@ void Game::menu()
 
 void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
+	// Check for winner
+	Game::checkWinner();
+
 	// Left paddle methods
 	leftPaddle.collide(ball);
 	leftPaddle.moveUp();
@@ -97,6 +101,10 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 	rightPaddle.collide(ball);
 	rightPaddle.moveUp();
 	rightPaddle.moveDown();
+
+	// Wait for goal
+	Game::scoreLeft(ball, leftPaddle, rightPaddle);
+	Game::scoreRight(ball, leftPaddle, rightPaddle);
 	
 	BeginDrawing();
 
@@ -112,6 +120,9 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 	// Draw game mode
 	DrawText("SINGLEPLAYER", GetScreenWidth()/2 - 70, 10, 23, RAYWHITE);
 
+	// Draw score
+	Game::displayScore();
+
 	// Draw FPS in top left corner
 	DrawFPS(10, 10);
 
@@ -120,6 +131,9 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 
 void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
+	// Check for winner
+	Game::checkWinner();
+
 	// Left paddle methods
 	leftPaddle.collide(ball);
 	leftPaddle.moveUp();
@@ -133,6 +147,10 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 	rightPaddle.collide(ball);
 	rightPaddle.moveUp();
 	rightPaddle.moveDown();
+
+	// Wait for goal
+	Game::scoreLeft(ball, leftPaddle, rightPaddle);
+	Game::scoreRight(ball, leftPaddle, rightPaddle);
 
 	BeginDrawing();
 
@@ -148,8 +166,42 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 	// Draw game mode
 	DrawText("MULTIPLAYER", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
 
+	// Draw score
+	Game::displayScore();
+
 	// Draw FPS in top left corner
 	DrawFPS(10, 10);
+
+	EndDrawing();
+}
+
+void Game::end()
+{
+	if (IsKeyPressed(KEY_ONE))
+	{
+		Game::setGameMode(SINGLEPLAYER);
+	}
+
+	if (IsKeyPressed(KEY_TWO))
+	{
+		Game::setGameMode(MULTIPLAYER);
+	}
+
+	BeginDrawing();
+
+	// Set background to white
+	ClearBackground(BLACK);
+
+	// Draw options
+	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
+	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
+
+
+	// Draw game mode
+	DrawText("GAME OVER!", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
+
+	std::string winText = winnerName + " Won!";
+	DrawText(winText.c_str(), GetScreenWidth() / 2 - 80, 70, 23, RAYWHITE);
 
 	EndDrawing();
 }
@@ -164,10 +216,62 @@ GameMode Game::getGameMode()
 	return currentGameMode;
 }
 
-void Game::scoreLeft(Ball& ball)
+// Right side scored
+void Game::scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
+	if (ball.ballRec.x <= 0 )
+	{
+		Game::reset(ball,leftPaddle,rightPaddle);
+		rightScore += 1;
+	}
 }
 
-void Game::scoreRight(Ball& ball)
+// Left side scored
+void Game::scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
+	if (ball.ballRec.x >= GetScreenWidth())
+	{
+		Game::reset(ball,leftPaddle,rightPaddle);
+		leftScore += 1;
+	}
+}
+
+// Check for win
+void Game::checkWinner()
+{
+	if (leftScore == max)
+	{
+		leftScore = 0;
+		rightScore = 0;
+		winnerName = "Left side";
+		setGameMode(END);
+	}
+	
+	if (rightScore == max)
+	{
+		leftScore = 0;
+		rightScore = 0;
+		winnerName = "Right side";
+		setGameMode(END);
+	}
+}
+
+void Game::displayScore()
+{
+	// Convert score from int to string
+	std::string leftScoreString = std::to_string(leftScore), rightScoreString = std::to_string(rightScore) ;
+
+	// left side score
+	DrawText(leftScoreString.c_str(), (GetScreenWidth() / 4) * 3 , 25, 25, RAYWHITE);
+
+	// Right side score
+	DrawText(rightScoreString.c_str(), GetScreenWidth() / 4, 25, 25, RAYWHITE);
+}
+
+void Game::reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
+{
+	// Reset ball and paddles
+	leftPaddle.reset(30, GetScreenHeight() / 2 - 50);
+	ball.reset(GetScreenWidth() / 2, GetScreenHeight() / 2);
+	rightPaddle.reset(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
 }

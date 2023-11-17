@@ -1,6 +1,7 @@
 #pragma once
 // Standard libraries
 #include <iostream>
+#include <string>
 
 // Include Raylib
 #include <raylib.h>
@@ -13,7 +14,8 @@
 enum GameMode {
 	MENU,
 	SINGLEPLAYER,
-	MULTIPLAYER
+	MULTIPLAYER,
+	END
 };
 
 class Game
@@ -28,12 +30,18 @@ public:
 	void menu();
 	void singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
 	void multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
-	void scoreLeft(Ball& ball);
-	void scoreRight(Ball& ball);
-
+	void scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
+	void scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
+	void checkWinner();
+	void end();
+	void reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
+	void displayScore();
 private:
 	// Player scores
-	int player1 = 0, player2 = 0;
+	int leftScore = 0, rightScore = 0, max = 3;
+
+	// winner name
+	std::string winnerName = "";
 
 	// Current game mode
 	GameMode currentGameMode = MENU;
