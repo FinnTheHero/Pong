@@ -3,7 +3,7 @@
 void createWindow()
 {
 	// Window starting dimensions
-	int windowWidth = 800, windowHeight = 600;
+	float windowWidth = 800, windowHeight = 600;
 
 	// Window name
 	std::string windowName = "Pong";

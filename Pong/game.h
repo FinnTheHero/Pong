@@ -36,5 +36,5 @@ private:
 	int player1 = 0, player2 = 0;
 
 	// Current game mode
-	GameMode currentGameMode;
+	GameMode currentGameMode = MENU;
 };

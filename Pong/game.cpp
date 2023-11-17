@@ -20,11 +20,7 @@ void Game::run()
 	// Main loop
 	while (!WindowShouldClose())
 	{
-		BeginDrawing();
-
-		// Set background to white
-		ClearBackground(BLACK);
-
+		
 		switch (getGameMode())
 		{
 		case MENU:
@@ -38,7 +34,6 @@ void Game::run()
 			break;
 		}
 
-		EndDrawing();
 	}
 }
 
@@ -54,48 +49,68 @@ void Game::menu()
 
 void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
+	// Left paddle methods
+	leftPaddle.collide(ball);
+	leftPaddle.moveUp();
+	leftPaddle.moveDown();
+	
 	// Ball methods
-	ball.draw();
 	ball.move();
 	ball.collide();
 
-	// Left paddle methods
-	leftPaddle.collide(ball);
-	leftPaddle.draw();
-	leftPaddle.moveUp();
-	leftPaddle.moveDown();
-
 	// Right paddle methods
 	rightPaddle.collide(ball);
-	rightPaddle.draw();
 	rightPaddle.moveUp();
 	rightPaddle.moveDown();
+	
+	BeginDrawing();
+
+	// Set background to white
+	ClearBackground(BLACK);
+
+	leftPaddle.draw(leftPaddle.leftPaddleRec);
+	
+	ball.draw();
+
+	rightPaddle.draw(rightPaddle.rightPaddleRec);
 
 	// Draw FPS in top left corner
 	DrawFPS(10, 10);
+
+	EndDrawing();
 }
 
 void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
-	// Ball methods
-	ball.draw();
-	ball.move();
-	ball.collide();
-
 	// Left paddle methods
 	leftPaddle.collide(ball);
-	leftPaddle.draw();
 	leftPaddle.moveUp();
 	leftPaddle.moveDown();
 
+	// Ball methods
+	ball.move();
+	ball.collide();
+
 	// Right paddle methods
 	rightPaddle.collide(ball);
-	rightPaddle.draw();
 	rightPaddle.moveUp();
 	rightPaddle.moveDown();
 
+	BeginDrawing();
+
+	// Set background to white
+	ClearBackground(BLACK);
+
+	leftPaddle.draw(leftPaddle.leftPaddleRec);
+
+	ball.draw();
+
+	rightPaddle.draw(rightPaddle.rightPaddleRec);
+
 	// Draw FPS in top left corner
 	DrawFPS(10, 10);
+
+	EndDrawing();
 }
 
 void Game::setGameMode(GameMode mode)

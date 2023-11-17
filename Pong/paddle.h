@@ -7,25 +7,28 @@ class Paddle
 {
 public:
 	// Paddle positions
-	int x, y;
+	float x, y;
 	
 	// Paddle dimensions
-	const int width = 25, height = 100;
+	float width = 20, height = 100;
 	
 	// Paddle speed
-	int speed = 350;
+	float speed = 350;
 
 	// Constructor
-	Paddle(int x, int y);
+	Paddle(float x, float y);
 	
 	// Paddle methods
-	void draw();
+	void draw(Rectangle paddle);
 };
 
 class LeftPaddle : public Paddle {
 public:
 	// Left padle constructor
-	LeftPaddle(int x, int y);
+	LeftPaddle(float x, float y);
+
+	// Rectangle for collision
+	Rectangle leftPaddleRec = { this->x, this->y, this->width, this->height };
 
 	// Left paddle methods
 	void collide(Ball& ball);
@@ -35,10 +38,12 @@ public:
 
 class RightPaddle : public Paddle {
 public:
-
 	// Right paddle constructor
-	RightPaddle(int x, int y);
+	RightPaddle(float x, float y);
 	
+	// Rectangle for collision
+	Rectangle rightPaddleRec = { this->x, this->y, this->width, this->height };
+
 	// Right paddle methods
 	void collide(Ball& ball);
 	void moveUp();

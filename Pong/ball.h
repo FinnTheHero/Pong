@@ -6,16 +6,19 @@ class Ball
 {
 public:
 	// Ball positions
-	int x = GetScreenWidth() / 2, y = GetScreenHeight() / 2;
+	float x = GetScreenWidth() / 2, y = GetScreenHeight() / 2;
 
 	// Ball dimensions
-	const int width = 20, height = 20;
+	float width = 20, height = 20;
 
 	// Ball directions
-	float xVel = -1.0, yVel = 0.0;
+	float xVel = -1, yVel = 0;
 
 	// Ball speed
-	int speed = 400;
+	float speed = 400;
+
+	// Ball rectangle
+	Rectangle ballRec = { this->x, this->y, this->width, this->height };
 
 	// Ball Methods
 	void draw();

@@ -1,12 +1,12 @@
 #include "paddle.h"
 
-Paddle::Paddle(int x, int y)
+Paddle::Paddle(float x, float y)
 {
 	this->x = x;
 	this->y = y;
 }
 
-void Paddle::draw()
+void Paddle::draw(Rectangle paddle)
 {
-	DrawRectangle(this->x, this->y, this->width, this->height, GREEN);
+	DrawRectangleRec(paddle, GREEN);
 }
