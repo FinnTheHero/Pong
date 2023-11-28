@@ -1,4 +1,4 @@
-#include "paddle.h"
+#include "../include/paddle.h"
 
 // Right paddle constructor
 RightPaddle::RightPaddle(float x, float y) : Paddle(x,y) {}

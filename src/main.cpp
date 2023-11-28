@@ -5,7 +5,7 @@
 #include <raylib.h>
 
 // Include game class
-#include "game.h"
+#include "../include/game.h"
 
 int main(void) {
 	Game game;

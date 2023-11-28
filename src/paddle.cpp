@@ -1,4 +1,4 @@
-#include "paddle.h"
+#include "../include/paddle.h"
 
 Paddle::Paddle(float x, float y)
 {

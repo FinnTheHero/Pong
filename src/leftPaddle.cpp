@@ -1,4 +1,4 @@
-#include "paddle.h"
+#include "../include/paddle.h"
 
 // Left paddle constructor
 LeftPaddle::LeftPaddle(float x, float y) : Paddle(x, y) {}
@@ -9,7 +9,6 @@ void LeftPaddle::collide(Ball& ball)
 	if (CheckCollisionRecs(LeftPaddle::leftPaddleRec, ball.ballRec))
 	{
 		ball.xVel = -ball.xVel;
-		/*
 		// Calculate the center of the ball
 		float ballCenterY = ball.y + ball.height / 2.0;
 
@@ -21,7 +20,7 @@ void LeftPaddle::collide(Ball& ball)
 
 		// Adjust the Y velocity based on the relative position
 		float newYVel = relativePosition / (LeftPaddle::leftPaddleRec.height / 2.0);
-		ball.yVel = std::min(std::max(newYVel, -0.9f), 0.9f);*/
+		ball.yVel = std::min(std::max(newYVel, -0.9f), 0.9f);
 	}
 }
 
