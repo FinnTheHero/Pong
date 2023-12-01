@@ -6,12 +6,7 @@ To run Pong:
     git clone -b linux-branch https://github.com/FinnTheHero/Pong.git && cd Pong
     ```
 
-2. Create directories `bin` and `obj`:
-    ```shell
-    mkdir bin obj
-    ```
-
-3. Make `build.sh` executable and run it
+2. Make `build.sh` executable and run it
     ```shell
     chmod +x build.sh && ./build.sh
     ```
