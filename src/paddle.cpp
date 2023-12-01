@@ -11,3 +11,11 @@ void Paddle::draw(Rectangle paddle)
 {
 	DrawRectangleRec(paddle, GREEN);
 }
+
+void Paddle::speedUp()
+{
+	if (this->speed < 600)
+	{
+		this->speed += 1;
+	}
+}

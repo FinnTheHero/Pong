@@ -3,6 +3,9 @@
 #include <raylib.h>
 #include "ball.h"
 
+#include <cstdlib>
+#include <ctime>
+
 class Paddle
 {
 public:
@@ -10,7 +13,7 @@ public:
 	float x, y;
 	
 	// Paddle dimensions
-	float width = 20, height = 100;
+	float width = 20, height = 120;
 	
 	// Paddle speed
 	float speed = 350;
@@ -20,6 +23,7 @@ public:
 	
 	// Paddle methods
 	void draw(Rectangle paddle);
+	void speedUp();
 };
 
 class LeftPaddle : public Paddle {

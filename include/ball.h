@@ -25,4 +25,5 @@ public:
 	void move();
 	void collide();
 	void reset(float x, float y);
+	void speedUp();
 };

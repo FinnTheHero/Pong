@@ -74,7 +74,7 @@ void Game::menu()
 	// Draw options
 	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-
+	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, GREEN);
 	
 	// Draw game mode
 	DrawText("MENU", GetScreenWidth() / 2 - 30, 10, 23, RAYWHITE);
@@ -119,7 +119,7 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 
 	// Draw game mode
 	DrawText("SINGLEPLAYER", GetScreenWidth()/2 - 70, 10, 23, RAYWHITE);
-
+	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, GREEN);
 	// Draw score
 	Game::displayScore();
 

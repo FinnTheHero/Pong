@@ -17,13 +17,19 @@ void Ball::collide()
     // Collide bottom
     if (Ball::ballRec.y+ Ball::ballRec.height >= GetScreenHeight())
     {
-        this->yVel = -this->yVel;
+        if(this->yVel > 0)
+        {
+            this->yVel = -this->yVel;
+        }
     }
 
     // Colide top
     if (Ball::ballRec.y <= 0)
     {
-        this->yVel = -this->yVel;
+        if (this->yVel < 0)
+        {
+            this->yVel = -this->yVel;
+        }
     }
 }
 
@@ -34,4 +40,14 @@ void Ball::reset(float x, float y)
 
     this->xVel = -1;
     this->yVel = 0;
+
+    this->speed = (this->speed / 3) * 2;
+}
+
+void Ball::speedUp()
+{
+    if(this->speed < 900)
+    {
+        this->speed += 10;
+    }
 }
