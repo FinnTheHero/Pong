@@ -120,6 +120,7 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 	// Draw game mode
 	DrawText("SINGLEPLAYER", GetScreenWidth()/2 - 70, 10, 23, RAYWHITE);
 	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, GREEN);
+	
 	// Draw score
 	Game::displayScore();
 
@@ -165,6 +166,7 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 
 	// Draw game mode
 	DrawText("MULTIPLAYER", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
+	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, GREEN);
 
 	// Draw score
 	Game::displayScore();
@@ -195,7 +197,7 @@ void Game::end()
 	// Draw options
 	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-
+	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, GREEN);
 
 	// Draw game mode
 	DrawText("GAME OVER!", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
@@ -239,7 +241,7 @@ void Game::scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPadd
 // Check for win
 void Game::checkWinner()
 {
-	if (leftScore == max)
+	if (leftScore == maxScore)
 	{
 		leftScore = 0;
 		rightScore = 0;
@@ -247,7 +249,7 @@ void Game::checkWinner()
 		setGameMode(END);
 	}
 	
-	if (rightScore == max)
+	if (rightScore == maxScore)
 	{
 		leftScore = 0;
 		rightScore = 0;

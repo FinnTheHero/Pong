@@ -39,7 +39,10 @@ void LeftPaddle::moveDown()
 
 void LeftPaddle::reset(float x, float y)
 {
-	this->speed = this->speed / 2;
+	if (this->speed - (this->speed / 2) > 350)
+	{
+		this->speed = this->speed / 2;
+	}
 	LeftPaddle::leftPaddleRec.x = x;
 	LeftPaddle::leftPaddleRec.y = y;
 }

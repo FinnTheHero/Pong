@@ -38,7 +38,7 @@ public:
 	void displayScore();
 private:
 	// Player scores
-	int leftScore = 0, rightScore = 0, max = 3;
+	int leftScore = 0, rightScore = 0, maxScore = 3;
 
 	// winner name
 	std::string winnerName = "";

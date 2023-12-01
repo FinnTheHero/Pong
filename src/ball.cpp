@@ -41,7 +41,10 @@ void Ball::reset(float x, float y)
     this->xVel = -1;
     this->yVel = 0;
 
-    this->speed = (this->speed / 3) * 2;
+    if (this->speed - ((this->speed / 3) * 2) > 350)
+    {
+        this->speed = (this->speed / 3) * 2;
+    }
 }
 
 void Ball::speedUp()
