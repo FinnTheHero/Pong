@@ -49,7 +49,7 @@ void Ball::reset(float x, float y)
 
 void Ball::speedUp()
 {
-    if(this->speed < 900)
+    if(this->speed < 1100)
     {
         this->speed += 10;
     }

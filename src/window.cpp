@@ -12,10 +12,14 @@ void createWindow()
 	InitWindow(windowWidth, windowHeight, windowName.c_str());
 
 	// Adjust the window states
+	SetWindowState(FLAG_VSYNC_HINT);
 	SetWindowState(FLAG_FULLSCREEN_MODE);
-
+	
 	// Manually cap the framerate to 60
 	SetTargetFPS(60);
+
+	// Hide the cursor
+	HideCursor();
 
 	SetExitKey(KEY_DELETE);
 }

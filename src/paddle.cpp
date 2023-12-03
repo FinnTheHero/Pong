@@ -14,7 +14,7 @@ void Paddle::draw(Rectangle paddle)
 
 void Paddle::speedUp()
 {
-	if (this->speed < 600)
+	if (this->speed < 750)
 	{
 		this->speed += 1;
 	}

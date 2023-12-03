@@ -72,9 +72,10 @@ void Game::menu()
 	ClearBackground(BLACK);
 
 	// Draw options
+	DrawText("PONG", GetScreenWidth() / 2 - 130, 200, 100, GREEN);
 	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, GREEN);
+	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 	
 	// Draw game mode
 	DrawText("MENU", GetScreenWidth() / 2 - 30, 10, 23, RAYWHITE);
@@ -118,8 +119,8 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 	rightPaddle.draw(rightPaddle.rightPaddleRec);
 
 	// Draw game mode
-	DrawText("SINGLEPLAYER", GetScreenWidth()/2 - 70, 10, 23, RAYWHITE);
-	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, GREEN);
+	DrawText("SINGLEPLAYER", GetScreenWidth()/2 - 90, 10, 23, RAYWHITE);
+	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, LIME);
 	
 	// Draw score
 	Game::displayScore();
@@ -166,7 +167,7 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 
 	// Draw game mode
 	DrawText("MULTIPLAYER", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
-	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, GREEN);
+	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, LIME);
 
 	// Draw score
 	Game::displayScore();
@@ -195,9 +196,10 @@ void Game::end()
 	ClearBackground(BLACK);
 
 	// Draw options
+	DrawText("GAME OVER", GetScreenWidth() / 2 - 300, 200, 100, GREEN);
 	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, GREEN);
+	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 
 	// Draw game mode
 	DrawText("GAME OVER!", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);

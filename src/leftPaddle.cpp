@@ -14,8 +14,14 @@ void LeftPaddle::collide(Ball& ball)
 			ball.speedUp();
 		}
 
-		std::srand(std::time(NULL));
-		ball.yVel = -0.9f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (2.0f * 0.9f)));
+		std::srand(static_cast<unsigned int>(std::time(0)));
+		if (ball.yVel < 0.0f) {
+			// If ball is going up
+			ball.yVel = static_cast<float>(rand()) / static_cast<float>(RAND_MAX / (-0.8f - -0.2f));
+		} else {
+			// If ball is going down or stationary
+			ball.yVel = static_cast<float>(rand()) / static_cast<float>(RAND_MAX / (0.8f - 0.2f));
+		}
 	}
 }
 
