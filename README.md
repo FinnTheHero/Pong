@@ -1,6 +1,6 @@
 # Pong
 <small>Pong, clasic 2D game made with C++ and Raylib</small>
----
+
 ## Run
 1. clone and cd into the project
     ```shell
