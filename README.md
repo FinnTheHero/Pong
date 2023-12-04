@@ -2,7 +2,7 @@
 Pong, clasic 2D game made with C++ and Raylib
 
 ## Run
-1. clone and cd into the project
+1. Clone and cd into the project
     ```shell
     git clone -b linux-branch https://github.com/FinnTheHero/Pong.git && cd Pong
     ```
