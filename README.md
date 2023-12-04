@@ -1,5 +1,5 @@
 # Pong
-<small>Pong, clasic 2D game made with C++ and Raylib</small>
+Pong, clasic 2D game made with C++ and Raylib
 
 ## Run
 1. clone and cd into the project
@@ -11,15 +11,12 @@
     ```shell
     chmod +x build.sh && ./build.sh
     ```
----
 ## Screenshots
 > You can find screenshots in img
 
 ![Screenshot 1](./img/Menu.png)
 ![Screenshot 2](./img/Single_Player.png)
 ![Screenshot 3](./img/Game_Over.png)
-
----
 
 ## Others
 * Max Score is 3
