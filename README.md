@@ -12,7 +12,7 @@ Pong, clasic 2D game made with C++ and Raylib
     chmod +x build.sh && ./build.sh
     ```
 ## Screenshots
-> You can find screenshots in img
+> You can find screenshots in `/img`
 
 ![Screenshot 1](./img/Menu.png)
 ![Screenshot 2](./img/Single_Player.png)
