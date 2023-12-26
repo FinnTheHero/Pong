@@ -1,11 +1,12 @@
+// Raylib
+#include <raylib.h>
+
 // Standard libraries
 #include <iostream>
 
-// Include Raylib
-#include <raylib.h>
-
-// Include game class
+// Custom headers
 #include "game.h"
+
 
 int main(void) {
 	Game game;

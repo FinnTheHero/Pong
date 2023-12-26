@@ -1,15 +1,16 @@
 #pragma once
+// Raylib
+#include <raylib.h>
+
 // Standard libraries
 #include <iostream>
 #include <string>
 
-// Include Raylib
-#include <raylib.h>
-
-// Game files
+// Custom headers
 #include "window.h"
 #include "ball.h"
 #include "paddle.h"
+
 
 enum GameMode {
 	MENU,
@@ -17,6 +18,7 @@ enum GameMode {
 	MULTIPLAYER,
 	END
 };
+
 
 class Game
 {
@@ -38,7 +40,7 @@ public:
 	void displayScore();
 private:
 	// Player scores
-	int leftScore = 0, rightScore = 0, max = 3;
+	int leftScore = 0, rightScore = 0, maxScore = 3;
 
 	// winner name
 	std::string winnerName = "";

@@ -1,25 +1,34 @@
 #pragma once
-#include <iostream>
+// Raylib
 #include <raylib.h>
+
+// Standard libraries
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+// Custom headers
 #include "ball.h"
+
 
 class Paddle
 {
 public:
 	// Paddle positions
 	float x, y;
-	
+
 	// Paddle dimensions
-	float width = 20, height = 100;
-	
+	float width = 20, height = 120;
+
 	// Paddle speed
 	float speed = 350;
 
 	// Constructor
 	Paddle(float x, float y);
-	
+
 	// Paddle methods
 	void draw(Rectangle paddle);
+	void speedUp();
 };
 
 class LeftPaddle : public Paddle {
@@ -41,7 +50,7 @@ class RightPaddle : public Paddle {
 public:
 	// Right paddle constructor
 	RightPaddle(float x, float y);
-	
+
 	// Rectangle for collision
 	Rectangle rightPaddleRec = { this->x, this->y, this->width, this->height };
 
