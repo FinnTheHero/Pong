@@ -1,10 +1,6 @@
 #pragma once
-// Raylib
 #include "raylib.h"
-
-// Standard libraries
 #include <cmath>
-
 
 class Ball
 {
@@ -29,5 +25,4 @@ public:
 	void move();
 	void collide();
 	void reset(float x, float y);
-	void speedUp();
 };

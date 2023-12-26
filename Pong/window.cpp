@@ -3,7 +3,7 @@
 void createWindow()
 {
 	// Window starting dimensions
-	float windowWidth = 0, windowHeight = 0;
+	float windowWidth = 800, windowHeight = 600;
 
 	// Window name
 	std::string windowName = "Pong";
@@ -12,14 +12,16 @@ void createWindow()
 	InitWindow(windowWidth, windowHeight, windowName.c_str());
 
 	// Adjust the window states
-	SetWindowState(FLAG_VSYNC_HINT);
-	SetWindowState(FLAG_FULLSCREEN_MODE);
+	SetWindowState(FLAG_WINDOW_RESIZABLE);
+	SetWindowState(FLAG_WINDOW_MAXIMIZED);
+	
+	// Make window un-resizable after adjusting
+	ClearWindowState(FLAG_WINDOW_RESIZABLE);
 
-	// Manually cap the framerate to 60
-	SetTargetFPS(144);
+	// Make game always run even on minimized
+	SetWindowState(FLAG_WINDOW_ALWAYS_RUN);
 
-	// Hide the cursor
-	HideCursor();
+	SetTargetFPS(60);
 
-	SetExitKey(KEY_DELETE);
+	SetExitKey(KEY_NULL);
 }

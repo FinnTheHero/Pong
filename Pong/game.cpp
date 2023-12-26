@@ -24,7 +24,7 @@ void Game::run()
 		{
 			// Get back to menu
 			Game::setGameMode(MENU);
-
+			
 			Game::reset(ball, leftPaddle, rightPaddle);
 		}
 
@@ -66,17 +66,16 @@ void Game::menu()
 		Game::setGameMode(MULTIPLAYER);
 	}
 
-	BeginDrawing();
+    BeginDrawing();
 
 	// Set background to white
 	ClearBackground(BLACK);
 
 	// Draw options
-	DrawText("PONG", GetScreenWidth() / 2 - 130, 200, 100, GREEN);
 	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 
+	
 	// Draw game mode
 	DrawText("MENU", GetScreenWidth() / 2 - 30, 10, 23, RAYWHITE);
 
@@ -93,7 +92,7 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 	leftPaddle.collide(ball);
 	leftPaddle.moveUp();
 	leftPaddle.moveDown();
-
+	
 	// Ball methods
 	ball.move();
 	ball.collide();
@@ -106,21 +105,20 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 	// Wait for goal
 	Game::scoreLeft(ball, leftPaddle, rightPaddle);
 	Game::scoreRight(ball, leftPaddle, rightPaddle);
-
+	
 	BeginDrawing();
 
 	// Set background to white
 	ClearBackground(BLACK);
 
 	leftPaddle.draw(leftPaddle.leftPaddleRec);
-
+	
 	ball.draw();
 
 	rightPaddle.draw(rightPaddle.rightPaddleRec);
 
 	// Draw game mode
-	DrawText("SINGLEPLAYER", GetScreenWidth() / 2 - 90, 10, 23, RAYWHITE);
-	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, LIME);
+	DrawText("SINGLEPLAYER", GetScreenWidth()/2 - 70, 10, 23, RAYWHITE);
 
 	// Draw score
 	Game::displayScore();
@@ -167,7 +165,6 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 
 	// Draw game mode
 	DrawText("MULTIPLAYER", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
-	DrawText("[DEL] Quit", GetScreenWidth() - 110, 10, 20, LIME);
 
 	// Draw score
 	Game::displayScore();
@@ -196,10 +193,9 @@ void Game::end()
 	ClearBackground(BLACK);
 
 	// Draw options
-	DrawText("GAME OVER", GetScreenWidth() / 2 - 300, 200, 100, GREEN);
 	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
+
 
 	// Draw game mode
 	DrawText("GAME OVER!", GetScreenWidth() / 2 - 70, 10, 23, RAYWHITE);
@@ -223,9 +219,9 @@ GameMode Game::getGameMode()
 // Right side scored
 void Game::scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
-	if (ball.ballRec.x <= 0)
+	if (ball.ballRec.x <= 0 )
 	{
-		Game::reset(ball, leftPaddle, rightPaddle);
+		Game::reset(ball,leftPaddle,rightPaddle);
 		rightScore += 1;
 	}
 }
@@ -235,7 +231,7 @@ void Game::scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPadd
 {
 	if (ball.ballRec.x >= GetScreenWidth())
 	{
-		Game::reset(ball, leftPaddle, rightPaddle);
+		Game::reset(ball,leftPaddle,rightPaddle);
 		leftScore += 1;
 	}
 }
@@ -243,15 +239,15 @@ void Game::scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPadd
 // Check for win
 void Game::checkWinner()
 {
-	if (leftScore == maxScore)
+	if (leftScore == max)
 	{
 		leftScore = 0;
 		rightScore = 0;
 		winnerName = "Left side";
 		setGameMode(END);
 	}
-
-	if (rightScore == maxScore)
+	
+	if (rightScore == max)
 	{
 		leftScore = 0;
 		rightScore = 0;
@@ -263,10 +259,10 @@ void Game::checkWinner()
 void Game::displayScore()
 {
 	// Convert score from int to string
-	std::string leftScoreString = std::to_string(leftScore), rightScoreString = std::to_string(rightScore);
+	std::string leftScoreString = std::to_string(leftScore), rightScoreString = std::to_string(rightScore) ;
 
 	// left side score
-	DrawText(leftScoreString.c_str(), (GetScreenWidth() / 4) * 3, 25, 25, RAYWHITE);
+	DrawText(leftScoreString.c_str(), (GetScreenWidth() / 4) * 3 , 25, 25, RAYWHITE);
 
 	// Right side score
 	DrawText(rightScoreString.c_str(), GetScreenWidth() / 4, 25, 25, RAYWHITE);
