@@ -56,10 +56,10 @@ void Game::stop()
 void Game::menu()
 {
 
-	if (IsKeyPressed(KEY_ONE))
+	/*if (IsKeyPressed(KEY_ONE))
 	{
 		Game::setGameMode(SINGLEPLAYER);
-	}
+	}*/
 
 	if (IsKeyPressed(KEY_TWO))
 	{
@@ -73,12 +73,12 @@ void Game::menu()
 
 	// Draw options
 	DrawText("PONG", GetScreenWidth() / 2 - 130, 200, 100, GREEN);
-	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
+	DrawText("[1] Single Player - Locked", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, DARKGRAY);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
 	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 
 	// Draw game mode
-	DrawText("MENU", GetScreenWidth() / 2 - 30, 10, 23, RAYWHITE);
+	DrawText("MENU", GetScreenWidth() / 2 - 30, 25, 23, RAYWHITE);
 
 	EndDrawing();
 
@@ -180,10 +180,10 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 
 void Game::end()
 {
-	if (IsKeyPressed(KEY_ONE))
+	/*if (IsKeyPressed(KEY_ONE))
 	{
 		Game::setGameMode(SINGLEPLAYER);
-	}
+	}*/
 
 	if (IsKeyPressed(KEY_TWO))
 	{
@@ -197,7 +197,7 @@ void Game::end()
 
 	// Draw options
 	DrawText("GAME OVER!", GetScreenWidth() / 2 - 300, 200, 100, GREEN);
-	DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
+	DrawText("[1] Single Player - Locked", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, DARKGRAY);
 	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
 	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 
@@ -264,10 +264,10 @@ void Game::displayScore()
 	std::string leftScoreString = std::to_string(leftScore), rightScoreString = std::to_string(rightScore);
 
 	// left side score
-	DrawText(leftScoreString.c_str(), (GetScreenWidth() / 4) * 3, 25, 25, RAYWHITE);
+	DrawText(rightScoreString.c_str(), (GetScreenWidth() / 4) * 3, 25, 25, RAYWHITE);
 
 	// Right side score
-	DrawText(rightScoreString.c_str(), GetScreenWidth() / 4, 25, 25, RAYWHITE);
+	DrawText(leftScoreString.c_str(), GetScreenWidth() / 4, 25, 25, RAYWHITE);
 }
 
 void Game::reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
