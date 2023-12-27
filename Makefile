@@ -1,7 +1,7 @@
 CC=g++
 
-CFLAGS=-Wall -I./include
-LDFLAGS=-lraylib
+CFLAGS=-Wall -I./include -std=c++23
+LDFLAGS=-lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 SRC_DIR=./src
 OBJ_DIR=./obj

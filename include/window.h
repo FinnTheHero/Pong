@@ -1,5 +1,9 @@
 #pragma once
-#include <raylib.h>
+// Standard libraries
 #include <iostream>
+
+// Raylib
+#include <raylib.h>
+
 
 void createWindow();

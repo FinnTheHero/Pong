@@ -1,10 +1,15 @@
 #pragma once
+// Standard libraries
 #include <iostream>
-#include <raylib.h>
-#include "ball.h"
-
 #include <cstdlib>
 #include <ctime>
+
+// Raylib
+#include <raylib.h>
+
+// Custom headers
+#include "ball.h"
+
 
 class Paddle
 {

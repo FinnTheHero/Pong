@@ -1,6 +1,10 @@
 #pragma once
-#include "raylib.h"
+// Standard libraries
 #include <cmath>
+
+// Raylib
+#include <raylib.h>
+
 
 class Ball
 {
