@@ -109,7 +109,7 @@ void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPa
 
 	BeginDrawing();
 
-	// Set background to white
+	// Set background to black
 	ClearBackground(BLACK);
 
 	leftPaddle.draw(leftPaddle.leftPaddleRec);
@@ -156,7 +156,7 @@ void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPad
 
 	BeginDrawing();
 
-	// Set background to white
+	// Set background to black
 	ClearBackground(BLACK);
 
 	leftPaddle.draw(leftPaddle.leftPaddleRec);
@@ -192,7 +192,7 @@ void Game::end()
 
 	BeginDrawing();
 
-	// Set background to white
+	// Set background to black
 	ClearBackground(BLACK);
 
 	// Draw options

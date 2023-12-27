@@ -2,23 +2,23 @@
 
 void createWindow()
 {
-	// Window starting dimensions
-	float windowWidth = 0, windowHeight = 0;
-
-	// Window name
-	std::string windowName = "Pong";
+	// Monitor ID
+	int monitor = 0;
 
 	// Create the window
-	InitWindow(windowWidth, windowHeight, windowName.c_str());
+	InitWindow(GetMonitorWidth(monitor), GetMonitorHeight(monitor), "Pong");
+
+	// Pick monitor
+	SetWindowMonitor(monitor);
 
 	// Adjust the window states
 	SetWindowState(FLAG_VSYNC_HINT);
 	SetWindowState(FLAG_FULLSCREEN_MODE);
 
-	// Manually cap the framerate to 60
-	SetTargetFPS(144);
+	// Make FPS same as monitor refresh rate
+	int monitorRefreshRate = GetMonitorRefreshRate(monitor);
+	SetTargetFPS(monitorRefreshRate);
 
-	// Hide the cursor
 	HideCursor();
 
 	SetExitKey(KEY_DELETE);
