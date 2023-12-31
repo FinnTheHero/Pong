@@ -2,20 +2,19 @@
 
 void Ball::draw()
 {
-    DrawRectangleRec(Ball::ballRec, GREEN);
+    DrawRectangleRec(ballRec, GREEN);
 }
 
 void Ball::move()
 {
-    // Update the ball's position based on the velocity components
-    Ball::ballRec.x += this->xVel * GetFrameTime() * this->speed;
-    Ball::ballRec.y += this->yVel * GetFrameTime() * this->speed;
+    ballRec.x += this->xVel * GetFrameTime() * this->speed;
+    ballRec.y += this->yVel * GetFrameTime() * this->speed;
 }
 
 void Ball::collide()
 {
     // Collide bottom
-    if (Ball::ballRec.y + Ball::ballRec.height >= GetScreenHeight())
+    if (ballRec.y + ballRec.height >= GetScreenHeight())
     {
         if (this->yVel > 0)
         {
@@ -24,7 +23,7 @@ void Ball::collide()
     }
 
     // Colide top
-    if (Ball::ballRec.y <= 0)
+    if (ballRec.y <= 0)
     {
         if (this->yVel < 0)
         {
@@ -35,8 +34,8 @@ void Ball::collide()
 
 void Ball::reset(float x, float y)
 {
-    Ball::ballRec.x = x;
-    Ball::ballRec.y = y;
+    ballRec.x = x;
+    ballRec.y = y;
 
     this->xVel = -1;
     this->yVel = 0;

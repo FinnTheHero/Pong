@@ -1,12 +1,10 @@
 #include "paddle.h"
 
-// Right paddle constructor
 RightPaddle::RightPaddle(float x, float y) : Paddle(x, y) {}
 
-// Collide ball
 void RightPaddle::collide(Ball& ball)
 {
-	if (CheckCollisionRecs(RightPaddle::rightPaddleRec, ball.ballRec))
+	if (CheckCollisionRecs(rightPaddleRec, ball.ballRec))
 	{
 		if (ball.xVel > 0)
 		{
@@ -28,19 +26,19 @@ void RightPaddle::collide(Ball& ball)
 
 void RightPaddle::moveUp()
 {
-	if (IsKeyDown(KEY_UP) && RightPaddle::rightPaddleRec.y > 0)
+	if (IsKeyDown(KEY_UP) && rightPaddleRec.y > 0)
 	{
-		RightPaddle::rightPaddleRec.y -= GetFrameTime() * this->speed * 1.1;
-		RightPaddle::speedUp();
+		rightPaddleRec.y -= GetFrameTime() * this->speed * 1.1;
+		speedUp();
 	}
 }
 
 void RightPaddle::moveDown()
 {
-	if (IsKeyDown(KEY_DOWN) && RightPaddle::rightPaddleRec.y + RightPaddle::rightPaddleRec.height < GetScreenHeight())
+	if (IsKeyDown(KEY_DOWN) && rightPaddleRec.y + rightPaddleRec.height < GetScreenHeight())
 	{
-		RightPaddle::rightPaddleRec.y += GetFrameTime() * this->speed * 1.1;
-		RightPaddle::speedUp();
+		rightPaddleRec.y += GetFrameTime() * this->speed * 1.1;
+		speedUp();
 	}
 }
 
@@ -50,6 +48,7 @@ void RightPaddle::reset(float x, float y)
 	{
 		this->speed = this->speed / 2;
 	}
-	RightPaddle::rightPaddleRec.x = x;
-	RightPaddle::rightPaddleRec.y = y;
+
+	rightPaddleRec.x = x;
+	rightPaddleRec.y = y;
 }

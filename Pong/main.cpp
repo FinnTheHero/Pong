@@ -14,5 +14,6 @@ int main(void) {
 	game.init();
 	game.run();
 	game.stop();
+
 	return 0;
 }
