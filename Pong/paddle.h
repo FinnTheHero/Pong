@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <random>
 
 // Custom headers
 #include "ball.h"
@@ -22,30 +23,22 @@ public:
 
 	Paddle(float x, float y);
 
-	void draw(Rectangle paddle);
+	Rectangle paddleRec = { this->x, this->y, this->width, this->height };
+
+	void draw();
 	void speedUp();
+	void collide(Ball& ball);
+	void reset(float x, float y);
+	void moveUp(KeyboardKey key);
+	void moveDown(KeyboardKey key);
 };
 
 class LeftPaddle : public Paddle {
 public:
 	LeftPaddle(float x, float y);
-
-	Rectangle leftPaddleRec = { this->x, this->y, this->width, this->height };
-
-	void collide(Ball& ball);
-	void moveUp();
-	void moveDown();
-	void reset(float x, float y);
 };
 
 class RightPaddle : public Paddle {
 public:
 	RightPaddle(float x, float y);
-
-	Rectangle rightPaddleRec = { this->x, this->y, this->width, this->height };
-
-	void collide(Ball& ball);
-	void moveUp();
-	void moveDown();
-	void reset(float x, float y);
 };

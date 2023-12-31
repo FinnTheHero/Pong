@@ -1,5 +1,16 @@
 #include "ball.h"
 
+Ball::Ball(float x, float y, float xVel, float yVel)
+{
+	this->x = x;
+	this->y = y;
+
+	this->xVel = xVel;
+	this->yVel = yVel;
+
+    ballRec = { this->x, this->y, this->width, this->height };
+}
+
 void Ball::draw()
 {
     DrawRectangleRec(ballRec, GREEN);
@@ -32,13 +43,13 @@ void Ball::collide()
     }
 }
 
-void Ball::reset(float x, float y)
+void Ball::reset(float x, float y, float xVel, float yVel)
 {
     ballRec.x = x;
     ballRec.y = y;
 
-    this->xVel = -1;
-    this->yVel = 0;
+    this->xVel = xVel;
+    this->yVel = yVel;
 
     if (this->speed - ((this->speed / 3) * 2) > 350)
     {

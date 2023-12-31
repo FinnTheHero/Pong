@@ -32,9 +32,10 @@ public:
 	GameMode getGameMode();
 	
 	void menu();
-	void singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
-	void multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
-	
+	void singlePlayer();
+	void multiPlayer();
+	void bot(Ball& ball, Paddle& paddle);
+
 	// Add score to the player who scored
 	void scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
 	void scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
@@ -48,11 +49,10 @@ public:
 private:
 	int leftScore = 0, rightScore = 0, maxScore = 3;
 
-	std::string winnerName = "";
+	std::string winnerName;
 	std::string winText;
 
-
-	GameMode currentGameMode = MENU;
-
 	int pongStringSize, menuStringSize, singlePlayerStringSize, multiPlayerStringSize, gameOverStringSize, quitStringSize;
+
+	GameMode currentGameMode;
 };
