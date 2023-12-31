@@ -58,7 +58,7 @@ void Game::menu()
 		ClearBackground(BLACK);
 
 		DrawText("PONG", (GetScreenWidth() - pongStringSize) / 2, 200, 100, GREEN);
-		DrawText("[1] Single Player - Locked", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, DARKGRAY);
+		DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 		DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
 		DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 
@@ -200,7 +200,7 @@ void Game::end()
 			DrawText(winText.c_str(), (GetScreenWidth() - MeasureText(winText.c_str(), 23)) / 2, 70, 23, RAYWHITE);
 			
 			DrawText("GAME OVER", (GetScreenWidth() - gameOverStringSize) / 2, 200, 100, GREEN);
-			DrawText("[1] Single Player - Locked", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, DARKGRAY);
+			DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
 			DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
 			DrawText("[ESC] Menu", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
 			DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 120, 23, LIME);
