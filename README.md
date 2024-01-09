@@ -17,11 +17,14 @@ Download the executable from the latest release, make sure you have Raylib insta
     git clone -b linux-branch https://github.com/FinnTheHero/Pong.git && cd Pong
     ```
 
-2. Make `build_prod.sh` executable and run it
+2. Make executables and working directories
     ```shell
-    chmod +x build_prod.sh && ./build_prod.sh
+    mkdir -p bin obj
+    chmod +x prod.sh
+    chmod +x stats.sh
+    ./prod.sh
     ```
-   This will generate the executable in the root directory `/`
+   This will generate the executable in Pong's root directory `/`
 
 ## Work on Pong
 1. Clone and cd into the project
@@ -29,9 +32,12 @@ Download the executable from the latest release, make sure you have Raylib insta
     git clone -b linux-branch https://github.com/FinnTheHero/Pong.git && cd Pong
     ```
 
-2. Make `build_dev.sh` executable and run it
+2. Make executables and working directories
     ```shell
-    chmod +x build_dev.sh && ./build_dev.sh
+    mkdir -p bin obj
+    chmod +x dev.sh
+    chmod +x stats.sh
+    ./dev.sh
     ```
 
 ## About the Game
@@ -42,7 +48,7 @@ Download the executable from the latest release, make sure you have Raylib insta
 * `Delete` to quit the game
 
 ## Screenshots
-> You can find screenshots in `/public/extras`
+> You can find screenshots in `/public/extras/`
 
 ![Screenshot 1](./public/extras/Menu.png)
 ![Screenshot 2](./public/extras/Single_Player.png)

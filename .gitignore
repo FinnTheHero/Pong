@@ -1,11 +1,8 @@
-# Compiled Object files
-*.o
+# IDE files
+.vscode/
 
 # Executables
 Pong
-
-# IDE files
-.vscode/
 
 # Build output directory
 obj/
