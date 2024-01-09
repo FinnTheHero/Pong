@@ -1,5 +1,5 @@
 # Pong
-Pong, clasic 2D game made with C++ and Raylib
+Pong, a classic 2D game made with C++ and Raylib
 
 ![Icon](./public/extras/Icon.png)
 
@@ -8,7 +8,7 @@ Pong, clasic 2D game made with C++ and Raylib
 ## Play
 
 ### From releases
-Install latest release executable, make sure you have Raylib installed and run the game
+Download the executable from the latest release, make sure you have Raylib installed, and run the game.
 
 ### Build Pong
 
@@ -21,7 +21,7 @@ Install latest release executable, make sure you have Raylib installed and run t
     ```shell
     chmod +x build_prod.sh && ./build_prod.sh
     ```
-This will generate executable in root directory of Pong `/`
+   This will generate the executable in the root directory `/`
 
 ## Work on Pong
 1. Clone and cd into the project
@@ -34,12 +34,12 @@ This will generate executable in root directory of Pong `/`
     chmod +x build_dev.sh && ./build_dev.sh
     ```
 
-## About Game
-* Max Score is 3
-* Left Side Movement `W` & `S`
-* Right Side Movement `Arrow Key Up` & `Arrow Key Down`
-* `Escape` Return To Main Menu
-* `Delete` Quit Game
+## About the Game
+* The maximum score is 3
+* Left side movement: `W` & `S`
+* Right side movement: `Arrow Key Up` & `Arrow Key Down`
+* `Escape` to return to the main menu
+* `Delete` to quit the game
 
 ## Screenshots
 > You can find screenshots in `/public/extras`
