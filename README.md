@@ -43,7 +43,7 @@ This will generate executable in root directory of Pong `/`
 * `Delete` Quit Game
 
 ## Screenshots
-> You can find screenshots in `/img`
+> You can find screenshots in `/public/extras`
 
 ![Screenshot 1](./public/extras/Menu.png)
 ![Screenshot 2](./public/extras/Single_Player.png)
