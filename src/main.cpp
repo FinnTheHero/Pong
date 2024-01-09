@@ -1,6 +1,3 @@
-// Raylib
-#include <raylib.h>
-
 // Standard libraries
 #include <iostream>
 
