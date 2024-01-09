@@ -37,12 +37,12 @@ public:
 	void bot(Ball& ball, Paddle& paddle);
 
 	// Add score to the player who scored
-	void scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
-	void scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
+	void scoreLeft(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
+	void scoreRight(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
 
 	void checkForWinner();
 	void end();
-	void reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
+	void reset(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
 	void displayScore();
 
 	void centeredStrings();

@@ -4,13 +4,7 @@ Paddle::Paddle(float x, float y)
 {
 	this->x = x;
 	this->y = y;
-}
 
-LeftPaddle::LeftPaddle(float x, float y) : Paddle(x, y) {
-	paddleRec = { this->x, this->y, this->width, this->height };
-}
-
-RightPaddle::RightPaddle(float x, float y) : Paddle(x, y) {
 	paddleRec = { this->x, this->y, this->width, this->height };
 }
 

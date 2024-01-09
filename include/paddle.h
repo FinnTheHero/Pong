@@ -32,13 +32,3 @@ public:
 	void moveUp(KeyboardKey key);
 	void moveDown(KeyboardKey key);
 };
-
-class LeftPaddle : public Paddle {
-public:
-	LeftPaddle(float x, float y);
-};
-
-class RightPaddle : public Paddle {
-public:
-	RightPaddle(float x, float y);
-};

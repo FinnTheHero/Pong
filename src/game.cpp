@@ -72,9 +72,9 @@ void Game::singlePlayer()
 {
 	Ball ball(GetScreenWidth() / 2, GetScreenHeight() / 2, -1, 0);
 
-	LeftPaddle leftPaddle(30, GetScreenHeight() / 2 - 50);
+	Paddle leftPaddle(30, GetScreenHeight() / 2 - 50);
 
-	RightPaddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
+	Paddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
 
 	while (!WindowShouldClose() && getGameMode() == SINGLEPLAYER)
 	{
@@ -123,9 +123,9 @@ void Game::multiPlayer()
 {
 	Ball ball(GetScreenWidth() / 2, GetScreenHeight() / 2, 1, 0);
 
-	LeftPaddle leftPaddle(30, GetScreenHeight() / 2 - 50);
+	Paddle leftPaddle(30, GetScreenHeight() / 2 - 50);
 
-	RightPaddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
+	Paddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
 
 	while (!WindowShouldClose() && getGameMode() == MULTIPLAYER)
 	{
@@ -220,7 +220,7 @@ GameMode Game::getGameMode()
 }
 
 // Right side scored
-void Game::scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
+void Game::scoreLeft(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle)
 {
 	if (ball.ballRec.x <= 0)
 	{
@@ -230,7 +230,7 @@ void Game::scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddl
 }
 
 // Left side scored
-void Game::scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
+void Game::scoreRight(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle)
 {
 	if (ball.ballRec.x >= GetScreenWidth())
 	{
@@ -267,7 +267,7 @@ void Game::displayScore()
 	DrawText(leftScoreString.c_str(), GetScreenWidth() / 4, 25, 25, RAYWHITE);
 }
 
-void Game::reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
+void Game::reset(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle)
 {
 	leftPaddle.reset(30, GetScreenHeight() / 2 - 50);
 	ball.reset(GetScreenWidth() / 2, GetScreenHeight() / 2, -ball.xVel, 0);
