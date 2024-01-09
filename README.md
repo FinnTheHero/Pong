@@ -3,8 +3,7 @@ Pong, clasic 2D game made with C++ and Raylib
 
 ![Icon](./public/extras/Icon.png)
 
-> Assuming you already have Raylib installed on your device
-> You can see this [Link](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux) for instructions
+> Assuming you already have Raylib installed on your device (You can see this [Link](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux) for instructions)
 
 ## Play
 
