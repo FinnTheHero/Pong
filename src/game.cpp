@@ -1,50 +1,33 @@
-#include "../include/game.h"
+#include "game.h"
 
 void Game::init()
 {
 	createWindow();
-	Game::setGameMode(MENU);
+	setGameMode(MENU);
+	centeredStrings();
 }
 
 void Game::run()
 {
-	// Create ball object
-	Ball ball;
-
-	// Create left paddle object
-	LeftPaddle leftPaddle(30, GetScreenHeight() / 2 - 50);
-
-	// Create right paddle object
-	RightPaddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
-
-	// Main loop
 	while (!WindowShouldClose())
 	{
-		if (IsKeyPressed(KEY_ESCAPE))
-		{
-			// Get back to menu
-			Game::setGameMode(MENU);
-			
-			Game::reset(ball, leftPaddle, rightPaddle);
-		}
-
-
 		switch (getGameMode())
 		{
 		case MENU:
-			Game::menu();
-			break;
-		case MULTIPLAYER:
-			Game::multiPlayer(ball, leftPaddle, rightPaddle);
+			menu();
 			break;
 		case SINGLEPLAYER:
-			Game::singlePlayer(ball, leftPaddle, rightPaddle);
+			singlePlayer();
+			break;
+		case MULTIPLAYER:
+			multiPlayer();
 			break;
 		case END:
-			Game::end();
+			end();
+			break;
+		default:
 			break;
 		}
-
 	}
 }
 
@@ -55,169 +38,175 @@ void Game::stop()
 
 void Game::menu()
 {
-
-	/*if (IsKeyPressed(KEY_ONE))
+	while (!WindowShouldClose() && getGameMode() == MENU)
 	{
-		Game::setGameMode(SINGLEPLAYER);
-	}*/
+		leftScore = 0;
+		rightScore = 0;
 
-	if (IsKeyPressed(KEY_TWO))
-	{
-		Game::setGameMode(MULTIPLAYER);
+		if (IsKeyPressed(KEY_ONE))
+		{
+			setGameMode(SINGLEPLAYER);
+		}
+
+		if (IsKeyPressed(KEY_TWO))
+		{
+			setGameMode(MULTIPLAYER);
+		}
+
+		BeginDrawing();
+
+		ClearBackground(BLACK);
+
+		DrawText("PONG", (GetScreenWidth() - pongStringSize) / 2, 200, 100, GREEN);
+		DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
+		DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
+		DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
+
+		DrawText("MENU", (GetScreenWidth() - menuStringSize) / 2, 25, 23, RAYWHITE);
+
+		EndDrawing();
 	}
-
-	Vector2 pongStringSize = MeasureTextEx(GetFontDefault(), "PONG", 100, 1);
-	Vector2 menuStringSize = MeasureTextEx(GetFontDefault(), "MENU", 23, 1);
-
-    BeginDrawing();
-
-	// Set background to white
-	ClearBackground(BLACK);
-
-	// Draw options
-	DrawText("PONG", (GetScreenWidth() - pongStringSize.x) / 2, 200, 100, GREEN);
-	DrawText("[1] Single Player - Locked", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, DARKGRAY);
-	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
-	
-	// Draw game mode
-	DrawText("MENU", (GetScreenWidth() - menuStringSize.x) / 2 , 25, 23, RAYWHITE);
-
-	EndDrawing();
-
 }
 
-void Game::singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
+void Game::singlePlayer()
 {
-	// Check for winner
-	Game::checkWinner();
+	Ball ball(GetScreenWidth() / 2, GetScreenHeight() / 2, -1, 0);
 
-	// Left paddle methods
-	leftPaddle.collide(ball);
-	leftPaddle.moveUp();
-	leftPaddle.moveDown();
-	
-	// Ball methods
-	ball.move();
-	ball.collide();
+	LeftPaddle leftPaddle(30, GetScreenHeight() / 2 - 50);
 
-	// Right paddle methods
-	rightPaddle.collide(ball);
-	rightPaddle.moveUp();
-	rightPaddle.moveDown();
+	RightPaddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
 
-	// Wait for goal
-	Game::scoreLeft(ball, leftPaddle, rightPaddle);
-	Game::scoreRight(ball, leftPaddle, rightPaddle);
-	
-	Vector2 singlePlayerStringSize = MeasureTextEx(GetFontDefault(), "SINGLEPLAYER", 23, 1);
-	Vector2 quitStringSize = MeasureTextEx(GetFontDefault(), "[DEL] Quit", 20, 1);
+	while (!WindowShouldClose() && getGameMode() == SINGLEPLAYER)
+	{
+		if (IsKeyPressed(KEY_ESCAPE) && getGameMode() != MENU)
+		{
+			setGameMode(MENU);
+			reset(ball, leftPaddle, rightPaddle);
+		}
 
-	BeginDrawing();
+		checkForWinner();
 
-	// Set background to white
-	ClearBackground(BLACK);
+		leftPaddle.collide(ball);
+		leftPaddle.moveUp(KEY_W);
+		leftPaddle.moveDown(KEY_S);
 
-	leftPaddle.draw(leftPaddle.leftPaddleRec);
-	
-	ball.draw();
+		ball.move();
+		ball.collide();
 
-	rightPaddle.draw(rightPaddle.rightPaddleRec);
+		rightPaddle.collide(ball);
+		bot(ball, rightPaddle);
 
-	// Draw game mode
-	DrawText("SINGLEPLAYER", (GetScreenWidth() - singlePlayerStringSize.x) / 2 , 25, 23, RAYWHITE);
-	DrawText("[DEL] Quit", GetScreenWidth() - quitStringSize.x - 20, 10, 20, LIME);
-	
-	// Draw score
-	Game::displayScore();
+		scoreLeft(ball, leftPaddle, rightPaddle);
+		scoreRight(ball, leftPaddle, rightPaddle);
 
-	// Draw FPS in top left corner
-	DrawFPS(10, 10);
 
-	EndDrawing();
+		BeginDrawing();
+
+			ClearBackground(BLACK);
+
+			leftPaddle.draw();
+			ball.draw();
+			rightPaddle.draw();
+
+			DrawText("SINGLEPLAYER", (GetScreenWidth() - singlePlayerStringSize) / 2, 25, 23, RAYWHITE);
+			DrawText("[DEL] Quit", GetScreenWidth() - quitStringSize - 20, 10, 20, LIME);
+
+			displayScore();
+
+			DrawFPS(10, 10);
+
+		EndDrawing();
+	}
 }
 
-void Game::multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
+void Game::multiPlayer()
 {
-	// Check for winner
-	Game::checkWinner();
+	Ball ball(GetScreenWidth() / 2, GetScreenHeight() / 2, 1, 0);
 
-	// Left paddle methods
-	leftPaddle.collide(ball);
-	leftPaddle.moveUp();
-	leftPaddle.moveDown();
+	LeftPaddle leftPaddle(30, GetScreenHeight() / 2 - 50);
 
-	// Ball methods
-	ball.move();
-	ball.collide();
+	RightPaddle rightPaddle(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
 
-	// Right paddle methods
-	rightPaddle.collide(ball);
-	rightPaddle.moveUp();
-	rightPaddle.moveDown();
+	while (!WindowShouldClose() && getGameMode() == MULTIPLAYER)
+	{
+		if (IsKeyPressed(KEY_ESCAPE) && getGameMode() != MENU)
+		{
+			setGameMode(MENU);
+			reset(ball, leftPaddle, rightPaddle);
+		}
 
-	// Wait for goal
-	Game::scoreLeft(ball, leftPaddle, rightPaddle);
-	Game::scoreRight(ball, leftPaddle, rightPaddle);
+		checkForWinner();
 
-	Vector2 multiPlayerStringSize = MeasureTextEx(GetFontDefault(), "MULTIPLAYER", 23, 1);
-	Vector2 quitStringSize = MeasureTextEx(GetFontDefault(), "[DEL] Quit", 20, 1);
+		leftPaddle.collide(ball);
+		leftPaddle.moveUp(KEY_W);
+		leftPaddle.moveDown(KEY_S);
 
-	BeginDrawing();
+		ball.move();
+		ball.collide();
 
-	// Set background to white
-	ClearBackground(BLACK);
+		rightPaddle.collide(ball);
+		rightPaddle.moveUp(KEY_UP);
+		rightPaddle.moveDown(KEY_DOWN);
 
-	leftPaddle.draw(leftPaddle.leftPaddleRec);
+		scoreLeft(ball, leftPaddle, rightPaddle);
+		scoreRight(ball, leftPaddle, rightPaddle);
 
-	ball.draw();
 
-	rightPaddle.draw(rightPaddle.rightPaddleRec);
+		BeginDrawing();
 
-	// Draw game mode
-	DrawText("MULTIPLAYER", (GetScreenWidth() - multiPlayerStringSize.x) / 2, 25, 23, RAYWHITE);
-	DrawText("[DEL] Quit", GetScreenWidth() - quitStringSize.x - 20, 10, 20, LIME);
+		ClearBackground(BLACK);
 
-	// Draw score
-	Game::displayScore();
+			leftPaddle.draw();
+			ball.draw();
+			rightPaddle.draw();
 
-	// Draw FPS in top left corner
-	DrawFPS(10, 10);
+			DrawText("MULTIPLAYER", (GetScreenWidth() - multiPlayerStringSize) / 2, 25, 23, RAYWHITE);
+			DrawText("[DEL] Quit", GetScreenWidth() - quitStringSize - 20, 10, 20, LIME);
 
-	EndDrawing();
+			displayScore();
+
+			DrawFPS(10, 10);
+
+		EndDrawing();
+	}
 }
 
 void Game::end()
 {
-	/*if (IsKeyPressed(KEY_ONE))
+	while (!WindowShouldClose() && getGameMode() == END)
 	{
-		Game::setGameMode(SINGLEPLAYER);
-	}*/
+		if (IsKeyPressed(KEY_ESCAPE))
+		{
+			setGameMode(MENU);
+		}
 
-	if (IsKeyPressed(KEY_TWO))
-	{
-		Game::setGameMode(MULTIPLAYER);
+		if (IsKeyPressed(KEY_ONE))
+		{
+			setGameMode(SINGLEPLAYER);
+		}
+
+		if (IsKeyPressed(KEY_TWO))
+		{
+			setGameMode(MULTIPLAYER);
+		}
+
+		winText = winnerName + " Won!";
+
+
+		BeginDrawing();
+
+			ClearBackground(BLACK);
+
+			DrawText(winText.c_str(), (GetScreenWidth() - MeasureText(winText.c_str(), 23)) / 2, 70, 23, RAYWHITE);
+			
+			DrawText("GAME OVER", (GetScreenWidth() - gameOverStringSize) / 2, 200, 100, GREEN);
+			DrawText("[1] Single Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, GREEN);
+			DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
+			DrawText("[ESC] Menu", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
+			DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 120, 23, LIME);
+
+		EndDrawing();
 	}
-	
-	std::string winText = winnerName + " Won!";
-
-	Vector2 gameOverStringSize = MeasureTextEx(GetFontDefault(), "GAME OVER", 100, 1);
-	Vector2 winnerStringSize = MeasureTextEx(GetFontDefault(), winText.c_str(), 23, 1);
-
-	BeginDrawing();
-
-	// Set background to white
-	ClearBackground(BLACK);
-
-	// Draw options
-	DrawText("GAME OVER", (GetScreenWidth() - gameOverStringSize.x) / 2, 200, 100, GREEN);
-	DrawText("[1] Single Player - Locked", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2, 23, DARKGRAY);
-	DrawText("[2] Multi Player", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 30, 23, GREEN);
-	DrawText("[DEL] Quit", GetScreenWidth() / 2 - 90, GetScreenHeight() / 2 + 90, 23, LIME);
-
-	DrawText(winText.c_str(), (GetScreenWidth() - winnerStringSize.x) / 2, 70, 23, RAYWHITE);
-
-	EndDrawing();
 }
 
 void Game::setGameMode(GameMode mode)
@@ -233,9 +222,9 @@ GameMode Game::getGameMode()
 // Right side scored
 void Game::scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
-	if (ball.ballRec.x <= 0 )
+	if (ball.ballRec.x <= 0)
 	{
-		Game::reset(ball,leftPaddle,rightPaddle);
+		reset(ball, leftPaddle, rightPaddle);
 		rightScore += 1;
 	}
 }
@@ -245,13 +234,12 @@ void Game::scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPadd
 {
 	if (ball.ballRec.x >= GetScreenWidth())
 	{
-		Game::reset(ball,leftPaddle,rightPaddle);
+		reset(ball, leftPaddle, rightPaddle);
 		leftScore += 1;
 	}
 }
 
-// Check for win
-void Game::checkWinner()
+void Game::checkForWinner()
 {
 	if (leftScore == maxScore)
 	{
@@ -260,7 +248,7 @@ void Game::checkWinner()
 		winnerName = "Left side";
 		setGameMode(END);
 	}
-	
+
 	if (rightScore == maxScore)
 	{
 		leftScore = 0;
@@ -272,20 +260,62 @@ void Game::checkWinner()
 
 void Game::displayScore()
 {
-	// Convert score from int to string
-	std::string leftScoreString = std::to_string(leftScore), rightScoreString = std::to_string(rightScore) ;
+	std::string leftScoreString = std::to_string(leftScore), rightScoreString = std::to_string(rightScore);
 
-	// left side score
-	DrawText(rightScoreString.c_str(), (GetScreenWidth() / 4) * 3 , 25, 25, RAYWHITE);
+	DrawText(rightScoreString.c_str(), (GetScreenWidth() / 4) * 3, 25, 25, RAYWHITE);
 
-	// Right side score
 	DrawText(leftScoreString.c_str(), GetScreenWidth() / 4, 25, 25, RAYWHITE);
 }
 
 void Game::reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle)
 {
-	// Reset ball and paddles
 	leftPaddle.reset(30, GetScreenHeight() / 2 - 50);
-	ball.reset(GetScreenWidth() / 2, GetScreenHeight() / 2);
+	ball.reset(GetScreenWidth() / 2, GetScreenHeight() / 2, -ball.xVel, 0);
 	rightPaddle.reset(GetScreenWidth() - 50, GetScreenHeight() / 2 - 50);
+}
+
+void Game::createWindow()
+{
+	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_FULLSCREEN_MODE);
+
+	InitWindow(0, 0, "Pong");
+
+	HideCursor();
+
+	SetExitKey(KEY_DELETE);
+}
+
+void Game::centeredStrings()
+{
+	pongStringSize = MeasureText("PONG", 100);
+	menuStringSize = MeasureText("MENU", 23);
+	singlePlayerStringSize = MeasureText("SINGLEPLAYER", 23);
+	multiPlayerStringSize = MeasureText("MULTIPLAYER", 23);
+	gameOverStringSize = MeasureText("GAME OVER", 100);
+	quitStringSize = MeasureText("[DEL] Quit", 20);
+}
+
+void Game::bot(Ball& ball, Paddle& paddle)
+{
+	// Follow the balls y position
+	if (paddle.paddleRec.y > 0 && (paddle.paddleRec.y + paddle.height) < GetScreenHeight())
+	{
+		if (ball.ballRec.y > paddle.paddleRec.y + (paddle.height / 2))
+		{
+			paddle.paddleRec.y += GetFrameTime() * paddle.speed * 1.1;
+		}
+		
+		if (ball.ballRec.y < paddle.paddleRec.y + (paddle.height / 2))
+		{
+			paddle.paddleRec.y -= GetFrameTime() * paddle.speed * 1.1;
+		}
+	}
+	else if(paddle.paddleRec.y < 0)
+	{
+		paddle.paddleRec.y += GetFrameTime() * paddle.speed * 1.1;
+	}
+	else if ((paddle.paddleRec.y + paddle.height) > GetScreenHeight())
+	{
+		paddle.paddleRec.y -= GetFrameTime() * paddle.speed * 1.1;
+	}
 }

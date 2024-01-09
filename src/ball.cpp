@@ -1,30 +1,40 @@
-#include "../include/ball.h"
+#include "ball.h"
+
+Ball::Ball(float x, float y, float xVel, float yVel)
+{
+	this->x = x;
+	this->y = y;
+
+	this->xVel = xVel;
+	this->yVel = yVel;
+
+    ballRec = { this->x, this->y, this->width, this->height };
+}
 
 void Ball::draw()
 {
-	DrawRectangleRec(Ball::ballRec, GREEN);
+    DrawRectangleRec(ballRec, GREEN);
 }
 
 void Ball::move()
 {
-    // Update the ball's position based on the velocity components
-    Ball::ballRec.x += this->xVel * GetFrameTime() * this->speed;
-    Ball::ballRec.y += this->yVel * GetFrameTime() * this->speed;
+    ballRec.x += this->xVel * GetFrameTime() * this->speed;
+    ballRec.y += this->yVel * GetFrameTime() * this->speed;
 }
 
 void Ball::collide()
 {
     // Collide bottom
-    if (Ball::ballRec.y+ Ball::ballRec.height >= GetScreenHeight())
+    if (ballRec.y + ballRec.height >= GetScreenHeight())
     {
-        if(this->yVel > 0)
+        if (this->yVel > 0)
         {
             this->yVel = -this->yVel;
         }
     }
 
     // Colide top
-    if (Ball::ballRec.y <= 0)
+    if (ballRec.y <= 0)
     {
         if (this->yVel < 0)
         {
@@ -33,13 +43,13 @@ void Ball::collide()
     }
 }
 
-void Ball::reset(float x, float y)
+void Ball::reset(float x, float y, float xVel, float yVel)
 {
-    Ball::ballRec.x = x;
-    Ball::ballRec.y = y;
+    ballRec.x = x;
+    ballRec.y = y;
 
-    this->xVel = -1;
-    this->yVel = 0;
+    this->xVel = xVel;
+    this->yVel = yVel;
 
     if (this->speed - ((this->speed / 3) * 2) > 350)
     {
@@ -49,7 +59,7 @@ void Ball::reset(float x, float y)
 
 void Ball::speedUp()
 {
-    if(this->speed < 1100)
+    if (this->speed < 1100)
     {
         this->speed += 10;
     }

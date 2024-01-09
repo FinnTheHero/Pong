@@ -2,7 +2,7 @@
 *.o
 
 # Executables
-pong
+Pong
 
 # IDE files
 .vscode/

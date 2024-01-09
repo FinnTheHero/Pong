@@ -1,15 +1,15 @@
 #pragma once
+// Raylib
+#include <raylib.h>
+
 // Standard libraries
 #include <iostream>
 #include <string>
 
-// Include Raylib
-#include <raylib.h>
-
-// Game files
-#include "window.h"
+// Custom headers
 #include "ball.h"
 #include "paddle.h"
+
 
 enum GameMode {
 	MENU,
@@ -18,31 +18,41 @@ enum GameMode {
 	END
 };
 
+
 class Game
 {
 public:
 	// Game methods
+	void createWindow();
 	void init();
 	void run();
 	void stop();
+	
 	void setGameMode(GameMode mode);
 	GameMode getGameMode();
+	
 	void menu();
-	void singlePlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
-	void multiPlayer(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
+	void singlePlayer();
+	void multiPlayer();
+	void bot(Ball& ball, Paddle& paddle);
+
+	// Add score to the player who scored
 	void scoreLeft(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
 	void scoreRight(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
-	void checkWinner();
+
+	void checkForWinner();
 	void end();
 	void reset(Ball& ball, LeftPaddle& leftPaddle, RightPaddle& rightPaddle);
 	void displayScore();
+
+	void centeredStrings();
 private:
-	// Player scores
 	int leftScore = 0, rightScore = 0, maxScore = 3;
 
-	// winner name
-	std::string winnerName = "";
+	std::string winnerName;
+	std::string winText;
 
-	// Current game mode
-	GameMode currentGameMode = MENU;
+	int pongStringSize, menuStringSize, singlePlayerStringSize, multiPlayerStringSize, gameOverStringSize, quitStringSize;
+
+	GameMode currentGameMode;
 };

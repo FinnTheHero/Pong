@@ -1,33 +1,29 @@
 #pragma once
-// Standard libraries
-#include <cmath>
-
 // Raylib
 #include <raylib.h>
+
+// Standard libraries
+#include <cmath>
 
 
 class Ball
 {
 public:
-	// Ball positions
-	float x = GetScreenWidth() / 2, y = GetScreenHeight() / 2;
+	float x = 0, y = 0;
 
-	// Ball dimensions
 	float width = 20, height = 20;
 
-	// Ball directions
-	float xVel = -1, yVel = 0;
+	float xVel, yVel;
 
-	// Ball speed
 	float speed = 400;
 
-	// Ball rectangle
+	Ball(float x, float y, float xVel, float yVel);
+	
 	Rectangle ballRec = { this->x, this->y, this->width, this->height };
 
-	// Ball Methods
 	void draw();
 	void move();
 	void collide();
-	void reset(float x, float y);
+	void reset(float x, float y, float xVel, float yVel);
 	void speedUp();
 };
