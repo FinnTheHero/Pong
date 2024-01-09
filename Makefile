@@ -1,6 +1,8 @@
 CC=g++
 
-CFLAGS=-Wall -I./include -std=c++23
+DEV_CFLAGS=-Wall -g -I./include -std=c++23
+PROD_CFLAGS=-Wall -O3 -I./include -std=c++23
+
 LDFLAGS=-lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 SRC_DIR=./src
@@ -10,22 +12,27 @@ BIN_DIR=./bin
 SOURCES=$(wildcard $(SRC_DIR)/*.cpp)
 OBJECTS=$(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SOURCES))
 
-TARGET=$(BIN_DIR)/Pong
+TARGET_PROD=./Pong
+TARGET_DEV=$(BIN_DIR)/Pong
 
-all: $(TARGET)
+.PHONY: all dev prod clean
 
-$(TARGET): $(OBJECTS)
+all: dev prod
+
+dev: CFLAGS=$(DEV_CFLAGS)
+dev: $(TARGET_DEV)
+
+prod: CFLAGS=$(PROD_CFLAGS)
+prod: $(TARGET_PROD)
+
+$(TARGET_PROD): $(OBJECTS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+$(TARGET_DEV): $(OBJECTS)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
-clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
+	rm -f $(OBJ_DIR)/*.o $(TARGET_DEV)

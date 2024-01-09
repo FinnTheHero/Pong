@@ -32,20 +32,20 @@ public:
 	GameMode getGameMode();
 	
 	void menu();
-	void singlePlayer();
-	void multiPlayer();
+	void singlePlayer(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
+	void multiPlayer(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
 	void bot(Ball& ball, Paddle& paddle);
 
-	// Add score to the player who scored
-	void scoreLeft(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
-	void scoreRight(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
+	// Increment score
+	void rightSideScored(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
+	void leftSideScored(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
 
 	void checkForWinner();
 	void end();
 	void reset(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle);
 	void displayScore();
 
-	void centeredStrings();
+	void calculateStringLengths();
 private:
 	int leftScore = 0, rightScore = 0, maxScore = 3;
 
