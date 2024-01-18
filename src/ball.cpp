@@ -25,21 +25,15 @@ void Ball::move()
 void Ball::collide()
 {
     // Collide bottom
-    if (ballRec.y + ballRec.height >= GetScreenHeight())
+    if (ballRec.y + ballRec.height >= GetScreenHeight() && this->yVel > 0)
     {
-        if (this->yVel > 0)
-        {
-            this->yVel = -this->yVel;
-        }
+        this->yVel = -this->yVel;
     }
 
     // Colide top
-    if (ballRec.y <= 0)
+    if (ballRec.y <= 0 && this->yVel < 0)
     {
-        if (this->yVel < 0)
-        {
-            this->yVel = -this->yVel;
-        }
+        this->yVel = -this->yVel;
     }
 }
 
