@@ -259,7 +259,7 @@ void Game::reset(Ball& ball, Paddle& leftPaddle, Paddle& rightPaddle)
 
 void Game::createWindow()
 {
-	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_FULLSCREEN_MODE);
+	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_FULLSCREEN_MODE | FLAG_WINDOW_RESIZABLE);
 
 	InitWindow(0, 0, "Pong");
 
